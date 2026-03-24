@@ -1,0 +1,26 @@
+class Solution {
+
+    public String encode(List<String> strs) {
+        if(strs.size()==0){
+            return Character.toString((char)258);
+        }
+        String sep=Character.toString((char)257);
+        StringBuilder s=new StringBuilder();
+        for(String str:strs){
+            s.append(str);
+            s.append(sep);
+        }
+        return s.toString();
+    }
+
+    public List<String> decode(String str) {
+        if(str.length()==0) return new ArrayList<>();
+        if (str.equals(Character.toString((char) 258))) {
+            return new ArrayList<>();
+        }
+        String sep=Character.toString((char)257);
+        String[] parts = str.split(sep, -1);
+        // Remove the trailing empty string created by the last separator
+        return Arrays.asList(Arrays.copyOf(parts, parts.length - 1));
+    }
+}
